@@ -1,0 +1,23 @@
+# @package _global_
+
+defaults:
+  - train.yaml
+  - _self_
+
+# default name for the experiment, determines logging folder path
+# (you can overwrite this name in experiment configs)
+name: "eval"
+
+models:
+  latent_module_init_fn:
+    anchor_dir: /home/ken/projects/monostylegan/third_party/pti/nha_00_200_imgs/person0000/PTI
+  stylegan_ckpt_path: /home/ken/projects/monostylegan/third_party/pti/nha_00_200_imgs/model_JWCRRBACYRRI_multi_id.pt
+  stylegan_model_path: /home/ken/projects/monostylegan/assets/stylegan2-ffhq.pkl
+  id_ckpt_path: /home/ken/projects/monostylegan/assets/model_ir_se50.pth
+ckpt_path: null
+out_dir: null
+
+datamodule:
+  scene_path: /home/ken/dataset/nha_data_dynamic_st/ckpts_and_data/data/person_0000
+  train_size: 750
+  test_size: 700

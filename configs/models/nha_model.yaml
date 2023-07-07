@@ -1,0 +1,39 @@
+_target_: models.model.StyleIBRModel
+_partial_: True
+
+defaults:
+  - optim: adam.yaml
+
+latent_module_init_fn:
+  _target_: models.latent_module.ExprAlphaV2
+  _partial_: True
+  anchor_dir: null
+  input_size: 53
+  hidden_size: 128
+  latent_size: 512
+  layer_count: 2
+
+lr_init_fn:
+  _target_: models.model.create_lr_dict
+  _partial_: True
+  latent_lr: 5e-4
+
+stylegan_model_path: null
+stylegan_ckpt_path: null
+id_ckpt_path: null
+
+w_pix_loss: 10.0
+w_lpips_loss: 10.0
+w_manifold: 0.5
+w_id_loss: 0.5
+w_expr_loss: 0.1
+w_pose_loss: 0.1
+w_rand_id: 0.0
+gamma_pose: 0.5
+w_consistency: 1.0
+
+high_res_lpips: True
+
+conditioned_latent: True
+embedding_path: null
+use_mystyle: False

@@ -1,0 +1,12 @@
+[submodule "third_party/neural-head-avatars"]
+	path = third_party/nha
+	url = git@github.com:philgras/neural-head-avatars.git
+[submodule "third_party/PTI"]
+	path = third_party/pti
+	url = git@github.com:danielroich/PTI.git
+[submodule "third_party/DECA"]
+	path = third_party/DECA
+	url = git@github.com:ken2576/DECA.git
+[submodule "third_party/MODNet"]
+	path = third_party/modnet
+	url = git@github.com:ZHKKKe/MODNet.git

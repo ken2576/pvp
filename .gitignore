@@ -1,0 +1,5 @@
+assets/
+*.pyc
+log/
+eval/
+__pycache__/

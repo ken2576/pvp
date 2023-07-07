@@ -1,0 +1,78 @@
+# @package _global_
+
+# specify here default training configuration
+defaults:
+  - datamodule: nha_dataset.yaml
+  - models: nha_model.yaml
+  - callbacks: default.yaml
+  - logger: tensorboard.yaml # null # set logger here or use command line (e.g. `python train.py logger=tensorboard`)
+  - trainer: default.yaml
+  - log_dir: default.yaml
+
+  # experiment configs allow for version control of specific configurations
+  # e.g. best hyperparameters for each combination of model and datamodule
+  # - experiment: nha_latent.yaml
+
+  # debugging config (enable through command line, e.g. `python train.py debug=default)
+  - debug: null
+
+  # config for hyperparameter optimization
+  - hparams_search: null
+
+  # optional local config for machine/user specific settings
+  # it's optional since it doesn't need to exist and is excluded from version control
+  - optional local: default.yaml
+
+  # enable color logging
+  - override hydra/hydra_logging: colorlog
+  - override hydra/job_logging: colorlog
+
+# path to original working directory
+# hydra hijacks working directory by changing it to the new log directory
+# https://hydra.cc/docs/next/tutorials/basic/running_your_app/working_directory
+original_work_dir: ${hydra:runtime.cwd}
+
+# path to folder with data
+# data_dir: /Data/Datasets
+
+# pretty print config at the start of the run using Rich library
+print_config: True
+
+# disable python warnings if they annoy you
+ignore_warnings: True
+
+# set False to skip model training
+train: True
+
+# evaluate on test set, using best model weights achieved during training
+# lightning chooses best weights based on the metric specified in checkpoint callback
+test: True
+
+# generate result videos
+predict: False # turned off for now, run eval instead
+
+# seed for random number generators in pytorch, numpy and python.random
+seed: 42
+
+# default name for the experiment, determines logging folder path
+# (you can overwrite this name in experiment configs)
+name: "default"
+
+# output directory for the final result
+out_dir: results/runs/${name}/${now:%Y-%m-%d}_${now:%H-%M-%S}
+
+log_dir: ./log/
+
+pretrained_ckpt: null
+
+models:
+  latent_module_init_fn:
+    anchor_dir: /home/ken/projects/monostylegan/third_party/pti/nha_00_200_imgs/person0000/PTI
+  stylegan_ckpt_path: /home/ken/projects/monostylegan/third_party/pti/nha_00_200_imgs/model_JWCRRBACYRRI_multi_id.pt
+  stylegan_model_path: /home/ken/projects/monostylegan/assets/stylegan2-ffhq.pkl
+  id_ckpt_path: /home/ken/projects/monostylegan/assets/model_ir_se50.pth
+
+datamodule:
+  scene_path: /home/ken/dataset/nha_data_dynamic_st/ckpts_and_data/data/person_0000
+  train_size: 750
+  test_size: 700

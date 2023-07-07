@@ -1,0 +1,10 @@
+_target_: data.nha_dataset.NHADataModule
+_partial_: True
+masked_rgb: True
+normalize: True
+batch_size: 1
+num_workers: 8
+
+scene_path: null
+train_size: null
+test_size: null
